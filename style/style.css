@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400&subset=latin-ext');
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: #fff;
+	text-align: center;
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+}
+
+#container {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.board {
+	max-width: 80vw;
+	width: 80%;
+	margin: 0 auto;
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.board-title {
+	background: #1B1E32;
+	color: #fff;
+	text-align: center;
+	margin: 0 auto;
+	padding: 10px;
+	font-weight: 400;
+}
+
+button {
+	color: #fff;
+	border: none;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.create-column, .create-board {
+	margin: 15px;
+	font-size: 1.5rem;
+	background-color: #404873;
+}
+
+.create-board {
+	background-color: #c0392b;
+}
+
+.btn-delete {
+	font-size: 14px;
+	font-weight: bold;
+	position: absolute;
+	top: 0;
+	padding: 1px;
+	margin: 2px;
+	right: 0;
+	width: 25px;
+	height: 25px;
+	background: transparent;
+}
+
+.btn-delete:hover {
+	width: 25px;
+	height: 25px;
+	background-color: rgba(52, 73, 94, .6);
+	border-radius: 50%;
+}
+
+.column-container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	background-color: transparent;
+	width: 100%;
+}
+
+.column {
+	background-color: #2980b9;
+	margin: 5px;
+	width: 100%;
+	min-width: 10%;
+	min-height: 75vh;
+	position: relative;
+}
+
+.column:nth-child(n+1) {
+	background: #2980b9;
+}
+
+.column:nth-child(2n+1) {
+	background: #8e44ad;
+}
+
+.column:nth-child(3n+1) {
+	background: #16a085;
+}
+
+.column-title {
+	text-align: center;
+	font-style: italic;
+	margin: 20px;
+}
+
+.column-card-list {
+	padding: 0;
+	list-style: none;
+}
+
+.card {
+	color: #fff;
+	display: flex;
+	min-height: 75px;
+	max-height: 100%;
+	width: 80%;
+	padding: 10px;
+	margin: 0 auto 5px auto;
+	position: relative;
+	overflow: hidden;
+}
+
+.card .card-description {
+	margin: 0;
+	padding: 3px;
+	width: 100%;
+	float: left;
+}
+
+.add-card {
+	background: #404873;
+	font-size: 1.3rem;
+	padding: 10px;
+	max-width: 80%;
+}
+
+.completed {
+	background-color: rgba(46, 204, 113,1.0);
+}
+
+.inProgress {
+	background-color: #f39c12;
+}
+
+.stopped {
+	background-color: #c0392b;
+}
+
+.card-placeholder {
+	border: 2px dashed #000;
+	min-height: 75px;
+	max-height: 100%;
+	width: 80%;
+	margin: 0 auto 5px auto;
+
+}
+
+.fake-placeholder {
+	font-weight: bold;
+	color: #fff;
+}
+
+ul {
+	list-style: none;
+}
+
+/*# sourceMappingURL=style.css.map */
