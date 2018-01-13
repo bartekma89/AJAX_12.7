@@ -17,7 +17,19 @@ function Board(name, id) {
 
         $createColumn.click(function () {
             var nameColumn = prompt('Name column');
-            self.addColumn(new Column(nameColumn));
+            var self = this;
+            
+            $.ajax({
+                method: 'POST',
+                url: baseURL + '/column',
+                data: {
+                    name: nameColumn,
+                }
+            })
+                .done(function(response) {
+                var column = new Column(response.id, nameColumn);
+                self.addColumn(column);
+            })
         });
 
         $board.append($boardTitle)

@@ -17,10 +17,24 @@ function Column(id, name) {
             self.removeColumn();
         });
 
-        $columnAddCard.click(function () {
+        $columnAddCard.click(function (e) {
+            e.preventDefault();
             var cardDescription = prompt('Description');
-            self.addCard(new Card(cardDescription));
+            var self = this;
             checkList();
+            
+            $.ajax({
+                metod: 'POST',
+                url: baseURL + '/card',
+                data: {
+                    name: cardDescription,
+                    bootcamp_kanban_column_id: self.id
+                }
+            })
+                .done(function(response) {
+                var card = new Card(response.id, cardDescription);
+                self.addCard(card);
+            })
         });
 
         $column.append($columnTitle)
@@ -44,7 +58,7 @@ Column.prototype = {
         var self = this;
         $.ajax({
             method: 'DELETE',
-            url: baseURL + "/column/" + self.id
+            url: baseURL + '/column/' + self.id
         })
             .done(function() {
             self.$element.remove();
