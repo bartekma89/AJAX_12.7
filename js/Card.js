@@ -1,8 +1,7 @@
-function Card(description) {
+function Card(id, description) {
     var self = this;
-
+    this.id = id;
     this.description = description;
-    this.id = generateId();
     this.$element = createCard();
 
     function createCard() {

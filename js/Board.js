@@ -1,6 +1,7 @@
-function Board(name) {
+function Board(name, id) {
     var self = this;
     this.name = name || 'Kanban Board';
+    this.id = id;
     this.$element = createBoard();
 
     function createBoard() {

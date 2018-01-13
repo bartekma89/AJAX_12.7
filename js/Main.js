@@ -1,27 +1,41 @@
-    function generateId() {
-        var chars = '0123456789abcdefghijklmnoprstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ';
-        var id = '';
-        for (var i = 0; i < 10; i++) {
-            id += chars[Math.floor(Math.random() * chars.length)];
-        }
-        return id;
-    }
+var baseURL = 'https://kodilla.com/pl/bootcamp-api';
+var myHeaders = {
+    'X-Client-Id': "2385",
+    'X-Auth-Token': '4cd85f8035f9d4ba11ed06a25d897ee4'
+}
 
-    var board1 = createBoard('My Board');
-
-    var toDo = new Column('ToDo');
-    var doing = new Column('Doing');
-    var done = new Column('Done');
-
-    var card1 = new Card('New task');
-    var card2 = new Card('New Kanban Board');
+$.ajaxSetup({
+    headers: myHeaders
+})
 
 
-    board1.addColumn(toDo);
-    board1.addColumn(doing);
-    board1.addColumn(done);
+$.ajax({
+    method: 'GET',
+    url: baseURL + '/board'
+})
+    .done(function(response) {
+    setupBoard(response.name)
+})
 
-    toDo.addCard(card1);
-    done.addCard(card2);
+function setupBoard(board) {
+    var newBoard = new Board(board.name, board.id);
+    $('.container').append(newBoard.$element);
+    var columns = board.columns;
+    setupColumn(columns, newBoard);
+}
 
-    checkList();
+function setupColumn(columns, board) {
+    columns.forEach(function(column) {
+        var newColumn = new Column(column.id, column.name);
+        board.addColumn(newColumn);
+        var cards = column.cards;
+        setupCard(newColumn, cards);
+    })
+}
+
+function setupCard(column, cards) {
+    cards.forEach(function(card) {
+        var newCard = new Card(card.id, card.name, card.bootcamp_kanban_column_id);
+        column.addCard(newCard);
+    })
+}
