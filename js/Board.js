@@ -17,7 +17,6 @@ function Board(name, id) {
 
         $createColumn.click(function () {
             var nameColumn = prompt('Name column');
-            var self = this;
             
             $.ajax({
                 method: 'POST',

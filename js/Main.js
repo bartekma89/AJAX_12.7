@@ -10,12 +10,12 @@ $.ajaxSetup({
 
 
 $.ajax({
-    method: 'GET',
-    url: baseURL + '/board'
-})
-    .done(function(response) {
-    setupBoard(response.name)
-})
+        method: 'GET',
+        url: baseURL + '/board'
+    })
+    .done(function (response) {
+        setupBoard(response)
+    })
 
 function setupBoard(board) {
     var newBoard = new Board(board.name, board.id);
@@ -25,7 +25,7 @@ function setupBoard(board) {
 }
 
 function setupColumn(columns, board) {
-    columns.forEach(function(column) {
+    columns.forEach(function (column) {
         var newColumn = new Column(column.id, column.name);
         board.addColumn(newColumn);
         var cards = column.cards;
@@ -34,7 +34,7 @@ function setupColumn(columns, board) {
 }
 
 function setupCard(column, cards) {
-    cards.forEach(function(card) {
+    cards.forEach(function (card) {
         var newCard = new Card(card.id, card.name, card.bootcamp_kanban_column_id);
         column.addCard(newCard);
     })
