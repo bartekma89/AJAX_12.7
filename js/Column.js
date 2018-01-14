@@ -21,11 +21,10 @@ function Column(id, name) {
         $columnAddCard.click(function (e) {
             e.preventDefault();
             var cardDescription = prompt('Description');
-            var self = this;
             checkList();
             
             $.ajax({
-                method: 'POST',
+                type: 'POST',
                 url: baseURL + '/card',
                 data: {
                     name: cardDescription,
