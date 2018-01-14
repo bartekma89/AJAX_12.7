@@ -19,7 +19,7 @@ $.ajax({
 
 function setupBoard(board) {
     var newBoard = new Board(board.name, board.id);
-    $('.container').append(newBoard.$element);
+    $('#container').append(newBoard.$element);
     var columns = board.columns;
     setupColumn(columns, newBoard);
 }
