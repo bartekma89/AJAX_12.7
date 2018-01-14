@@ -2,6 +2,7 @@ function Column(id, name) {
     var self = this;
     this.id = id;
     this.name = name || "New Column";
+    
     this.$element = createColumn();
 
     function createColumn() {
@@ -24,7 +25,7 @@ function Column(id, name) {
             checkList();
             
             $.ajax({
-                metod: 'POST',
+                method: 'POST',
                 url: baseURL + '/card',
                 data: {
                     name: cardDescription,
@@ -34,6 +35,8 @@ function Column(id, name) {
                 .done(function(response) {
                 var card = new Card(response.id, cardDescription);
                 self.addCard(card);
+            }).fail(function(response) {
+                console.log(response.status)
             })
         });
 
