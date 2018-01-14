@@ -1,7 +1,8 @@
-function Card(id, name) {
+function Card(id, name, columnId) {
     var self = this;
     this.id = id;
     this.name = name || 'No name given';
+    this.bootcamp_kanban_column_id = columnId;
     this.$element = createCard();
 
     function createCard() {
@@ -21,6 +22,10 @@ function Card(id, name) {
         $card.mouseover(function () {
             checkList();
         });
+        
+        $cardDescription.dblclick(function() {
+            self.changeCardName();
+        })
 
         $card.append($cardDelete)
             .append($cardDescription);
@@ -39,6 +44,26 @@ Card.prototype = {
         })
             .done(function() {
             self.$element.remove();
+        })
+    },
+    
+    changeCardName: function() {
+        var self = this;
+        var name = prompt("Enter new name");
+        var newName = name || "No name given";
+        $.ajax({
+            method: 'PUT',
+            url: baseURL + '/card/' + self.id,
+            data : {
+                name: newName,
+                bootcamp_kanban_column_id: self.bootcamp_kanban_column_id
+            }
+        })
+            .done(function() {
+            self.$element.find('.card-description').text(newName);
+        })
+            .fail(function(response) {
+            console.log(response.statusText)
         })
     },
 

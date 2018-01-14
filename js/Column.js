@@ -34,10 +34,12 @@ function Column(id, name) {
                 .done(function(response) {
                 var card = new Card(response.id, cardDescription);
                 self.addCard(card);
-            }).fail(function(response) {
-                console.log(response.status)
             })
         });
+        
+        $columnTitle.dblclick(function() {
+            self.changeColumnName();
+        })
 
         $column.append($columnTitle)
             .append($columnAddCard)
@@ -54,6 +56,22 @@ Column.prototype = {
     addCard: function (card) {
         this.$element.children('ul').prepend(card.$element);
         checkList();
+    },
+    
+    changeColumnName: function() {
+        var self = this;
+        var name = prompt('Enter new name');
+        var newName = name || "No name given";
+        $.ajax({
+            method: 'PUT',
+            url: baseURL + '/column/' + self.id,
+            data: {
+                name: newName
+            }
+        })
+            .done(function() {
+            self.$element.find('.column-title').text(newName);
+        })
     },
 
     removeColumn: function () {
